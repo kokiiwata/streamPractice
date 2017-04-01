@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javatry.colorbox.ColorBox;
 import javatry.colorbox.color.BoxColor;
+import javatry.colorbox.space.BoxSpace;
 import javatry.colorbox.unit.ColorBoxTestCase;
 
 /**
@@ -92,12 +93,39 @@ public class JFluteStringTest extends ColorBoxTestCase {
      */
     public void test_filterBlue() {
         List<ColorBox> colorBoxList = getColorBoxList();
-        String blue = "blue";
+        final String blue = "blue";
         List<ColorBox> blueBoxList = colorBoxList
                 .stream()
-                .filter(colorBox -> colorBox.getColor().toString().equals(blue))
+                .filter(colorBox -> blue.equals(colorBox.getColor().toString()))
                 .collect(Collectors.toList());
         log(blueBoxList);
+    }
+
+    /**
+     * ⑦カラーボックスのコンテンツを取り出して、リストを作りましょう！
+     * ※ foreachではなく、flatMapを使うこと
+     */
+    public void test_stringList() {
+        List<ColorBox> colorBoxList = getColorBoxList();
+        List<Object> コンテンツリスト = colorBoxList
+                .stream()
+                .flatMap(colorBox -> colorBox.getSpaceList().stream())
+                .map(space -> space.getContents())
+                .collect(Collectors.toList());
+        log(コンテンツリスト);
+    }
+
+    /**
+     * ⑧青カラーボックスのコンテンツのリストを作りましょう！
+     */
+    public void test_blueContentsList() {
+        List<ColorBox> colorBoxList = getColorBoxList();
+        List<Object> blueContentsList = colorBoxList.stream()
+                .filter(colorBox -> colorBox.getColor().toString().equals("yellow"))
+                .flatMap(colorBox -> colorBox.getSpaceList().stream())
+                .map(boxSpace -> boxSpace.getContents())
+                .collect(Collectors.toList());
+        log(blueContentsList);
     }
 
     /**
@@ -149,7 +177,6 @@ public class JFluteStringTest extends ColorBoxTestCase {
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(space -> space.getContents())
                 .collect(Collectors.toList());
-
 
 //        Integer sumCount = 0;
 //        for (String string : stringNames) {
