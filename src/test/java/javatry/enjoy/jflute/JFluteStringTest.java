@@ -128,22 +128,6 @@ public class JFluteStringTest extends ColorBoxTestCase {
     }
 
     /**
-     * カラーボックスに入ってる文字列の中で、一番長い文字列は？
-     */
-    public void test_length_findMax() {
-        List<ColorBox> colorBoxList = getColorBoxList();
-        colorBoxList.forEach(colorBox -> {
-            colorBox.getColor().getColorName();
-        });
-        List<String> stringNames = colorBoxList
-                .stream()
-                .map(colorBox -> colorBox.getColor())
-                .map(boxColor -> boxColor.getColorName())
-                .collect(Collectors.toList());
-        String preString = null;
-    }
-
-    /**
      * おまけ①)　カラーボックスに入ってるObjectの長さ(length)の合計は？
      */
     public void test_length_calculateLengthSum() {
@@ -151,12 +135,12 @@ public class JFluteStringTest extends ColorBoxTestCase {
         colorBoxList.forEach(colorBox -> {
             colorBox.getColor().getColorName();
         });
-        int sum = colorBoxList
+        int sumLength = colorBoxList
                 .stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .filter(boxSpace -> boxSpace.getContents() != null)
                 .mapToInt(boxSpace -> boxSpace.getContents().toString().length())
                 .sum();
-        log(sum);
+        log(sumLength);
     }
 }
