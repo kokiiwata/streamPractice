@@ -1,6 +1,7 @@
 package javatry.enjoy.jflute;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javatry.colorbox.ColorBox;
 import javatry.colorbox.color.BoxColor;
@@ -29,6 +30,8 @@ public class JFluteStringTest extends ColorBoxTestCase {
      * ①カラーボックスをfor文で回して、それぞれの色をログに出しましょう！
      */
     public void test_forColor() {
+        List<ColorBox> colorBoxList = getColorBoxList();
+        colorBoxList.stream().collect(Collectors.toList());
 
     }
 
@@ -48,7 +51,7 @@ public class JFluteStringTest extends ColorBoxTestCase {
 
     /**
      * ④.map()と、
-     * collect.Collections.toList()を使って色のリストを作りましょう！
+     * .collect(Collectors.toList());を使って色のリストを作りましょう！
      */
     public void test_createColorListByStream() {
 
